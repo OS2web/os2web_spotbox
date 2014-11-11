@@ -24,9 +24,9 @@ function os2web_spotbox_field_group_info() {
     'weight' => '1',
     'children' => array(
       0 => 'field_os2web_spotbox_lead_image',
-      1 => 'field_os2web_spotbox_ref_kle',
-      2 => 'field_os2web_spotbox_sitestruct',
-      3 => 'field_os2web_spotbox_image_tall',
+      1 => 'field_os2web_spotbox_sitestruct',
+      2 => 'field_os2web_spotbox_image_tall',
+      3 => 'field_os2web_spotbox_ref_kle',
       4 => 'title',
     ),
     'format_type' => 'htab',
@@ -55,8 +55,8 @@ function os2web_spotbox_field_group_info() {
     'label' => 'Links',
     'weight' => '3',
     'children' => array(
-      0 => 'field_os2web_spotbox_url',
-      1 => 'field_os2web_spotbox_text',
+      0 => 'field_os2web_spotbox_text',
+      1 => 'field_os2web_spotbox_url',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -111,11 +111,11 @@ function os2web_spotbox_field_group_info() {
     'label' => 'Emneord',
     'weight' => '4',
     'children' => array(
-      0 => 'field_os2web_spotbox_ref_place',
+      0 => 'field_os2web_spotbox_editor_tags',
       1 => 'field_os2web_spotbox_organizati',
-      2 => 'field_os2web_spotbox_editor_tags',
-      3 => 'field_os2web_spotbox_politics',
-      4 => 'field_os2web_spotbox_promote_to',
+      2 => 'field_os2web_spotbox_politics',
+      3 => 'field_os2web_spotbox_promote_to',
+      4 => 'field_os2web_spotbox_ref_place',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
