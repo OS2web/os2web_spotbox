@@ -1,0 +1,6 @@
+name: OS2Web spotbox entity
+type: module
+core: 8.x
+package: OS2Web
+dependencies:
+  - node

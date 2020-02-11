@@ -1,0 +1,31 @@
+add os2web spotbox entities:
+  title: 'Create new OS2Web Spotbox entities'
+
+administer os2web spotbox entities:
+  title: 'Administer OS2Web Spotbox entities'
+  description: 'Allow to access the administration form to configure OS2Web Spotbox entities.'
+  restrict access: true
+
+delete os2web spotbox entities:
+  title: 'Delete OS2Web Spotbox entities'
+
+edit os2web spotbox entities:
+  title: 'Edit OS2Web Spotbox entities'
+
+view published os2web spotbox entities:
+  title: 'View published OS2Web Spotbox entities'
+
+view unpublished os2web spotbox entities:
+  title: 'View unpublished OS2Web Spotbox entities'
+
+view all os2web spotbox revisions:
+  title: 'View all OS2Web Spotbox revisions'
+
+revert all os2web spotbox revisions:
+  title: 'Revert all OS2Web Spotbox revisions'
+  description: 'Role requires permission <em>view OS2Web Spotbox revisions</em> and <em>edit rights</em> for os2web spotbox entities in question or <em>administer os2web spotbox entities</em>.'
+
+delete all os2web spotbox revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view OS2Web Spotbox revisions</em> and <em>delete rights</em> for os2web spotbox entities in question or <em>administer os2web spotbox entities</em>.'
+

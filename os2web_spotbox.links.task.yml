@@ -1,0 +1,32 @@
+# OS2Web Spotbox routing definition
+
+entity.os2web_spotbox.collection:
+  title: OS2Web Spotbox
+  route_name: entity.os2web_spotbox.collection
+  base_route: system.admin_content
+
+os2web_spotbox.settings_tab:
+  route_name: os2web_spotbox.settings
+  title: 'Settings'
+  base_route: os2web_spotbox.settings
+
+entity.os2web_spotbox.canonical:
+  route_name: entity.os2web_spotbox.canonical
+  base_route: entity.os2web_spotbox.canonical
+  title: 'View'
+
+entity.os2web_spotbox.edit_form:
+  route_name: entity.os2web_spotbox.edit_form
+  base_route: entity.os2web_spotbox.canonical
+  title: 'Edit'
+
+entity.os2web_spotbox.version_history:
+  route_name: entity.os2web_spotbox.version_history
+  base_route: entity.os2web_spotbox.canonical
+  title: 'Revisions'
+
+entity.os2web_spotbox.delete_form:
+  route_name:  entity.os2web_spotbox.delete_form
+  base_route:  entity.os2web_spotbox.canonical
+  title: Delete
+  weight: 10

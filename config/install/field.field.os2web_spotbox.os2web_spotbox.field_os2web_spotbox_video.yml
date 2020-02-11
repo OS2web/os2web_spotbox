@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.os2web_spotbox.field_os2web_spotbox_video
+  module:
+    - link
+    - os2web_spotbox
+id: os2web_spotbox.os2web_spotbox.field_os2web_spotbox_video
+field_name: field_os2web_spotbox_video
+entity_type: os2web_spotbox
+bundle: os2web_spotbox
+label: Video
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link
