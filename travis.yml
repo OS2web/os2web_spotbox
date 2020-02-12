@@ -19,11 +19,11 @@ install:
   - export REPOSITORIES='"repositories":\ \['
   - export REPOSITORIES_REPLACE='"repositories":\[\{"type":"path","url":"..\/os2web_datalookup","options":\{"symlink":false\}\},'
   - export REQUIRE='"require":\ {'
-  - export REQUIRE_REPLACE='"require":{"os2web\/os2web_pagebuilder":"\*",'
+  - export REQUIRE_REPLACE='"require":{"os2web\/os2web_spotbox":"\*",'
   - sed -i "s/$REPOSITORIES/$REPOSITORIES_REPLACE/g" composer.json
   - sed -i "s/$REQUIRE/$REQUIRE_REPLACE/g" composer.json
-  - composer update os2web/os2web_pagebuilder
-  - PROJECT_PATH=$DRUPAL_ROOT/modules/contrib/os2web_pagebuilder
+  - composer update os2web/os2web_spotbox
+  - PROJECT_PATH=$DRUPAL_ROOT/modules/contrib/os2web_spotbox
   - cd $DRUPAL_ROOT/core
   - yarn install
   - npm install --global eslint-config-drupal-bundle stylelint
