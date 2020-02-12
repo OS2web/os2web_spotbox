@@ -1,14 +1,14 @@
 
 # OS2Web Spotbox menu items definition
 entity.os2web_spotbox.collection:
-  title: 'OS2Web Spotbox list'
+  title: 'OS2Web Spotbox'
   route_name: entity.os2web_spotbox.collection
   description: 'List OS2Web Spotbox entities'
   parent: system.admin_content
   weight: 100
 
 os2web_spotbox.admin.structure.settings:
-  title: 'OS2Web Spotbox settings'
+  title: 'OS2Web Spotbox'
   description: 'Configure OS2Web Spotbox entities'
   route_name: os2web_spotbox.settings
   parent: system.admin_structure
