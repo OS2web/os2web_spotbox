@@ -288,50 +288,39 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
     return [
       'default' => [
         'label' => t('Standard'),
-        'fields' => [
-          'field_os2web_spotbox_image',
-          'field_os2web_spotbox_link',
-          'field_os2web_spotbox_link_int',
-          'field_os2web_spotbox_link_title',
+        'disabled_fields' => [
+          'field_os2web_spotbox_link_text',
+          'field_os2web_spotbox_video',
+          'field_os2web_spotbox_link_butt',
         ],
       ],
       'text' => [
         'label' => t('Tekst'),
-        'fields' => [
-          'field_os2web_spotbox_image',
-          'field_os2web_spotbox_link',
-          'field_os2web_spotbox_link_int',
-          'field_os2web_spotbox_link_title',
-          'field_os2web_spotbox_link_text',
+        'disabled_fields' => [
+          'field_os2web_spotbox_video',
+          'field_os2web_spotbox_link_butt',
         ],
       ],
       'image' => [
         'label' => t('Billede'),
-        'fields' => [
-          'field_os2web_spotbox_image',
-          'field_os2web_spotbox_link',
-          'field_os2web_spotbox_link_int',
-          'field_os2web_spotbox_link_title',
+        'disabled_fields' => [
+          'field_os2web_spotbox_link_text',
+          'field_os2web_spotbox_video',
+          'field_os2web_spotbox_link_butt',
         ],
       ],
       'video' => [
         'label' => t('Video'),
-        'fields' => [
-          'field_os2web_spotbox_image',
-          'field_os2web_spotbox_link',
-          'field_os2web_spotbox_link_int',
-          'field_os2web_spotbox_link_title',
-          'field_os2web_spotbox_video',
+        'disabled_fields' => [
+          'field_os2web_spotbox_link_text',
+          'field_os2web_spotbox_link_butt',
         ],
       ],
       'buttons' => [
         'label' => t('Knapper'),
-        'fields' => [
-          'field_os2web_spotbox_image',
-          'field_os2web_spotbox_link',
-          'field_os2web_spotbox_link_int',
-          'field_os2web_spotbox_link_butt',
-          'field_os2web_spotbox_link_title',
+        'disabled_fields' => [
+          'field_os2web_spotbox_link_text',
+          'field_os2web_spotbox_video',
         ],
       ],
     ];

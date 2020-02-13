@@ -5,6 +5,7 @@ dependencies:
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_image
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
+    - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_ext
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_int
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_title
@@ -20,7 +21,7 @@ bundle: os2web_spotbox
 mode: default
 content:
   field_os2web_spotbox_image:
-    weight: 2
+    weight: 3
     settings:
       match_operator: CONTAINS
       form_mode: default
@@ -36,20 +37,12 @@ content:
     type: inline_entity_form_complex
     region: content
   field_os2web_spotbox_link:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_os2web_spotbox_link_butt:
-    weight: 5
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
-  field_os2web_spotbox_link_int:
     weight: 8
     settings:
       placeholder_url: ''
@@ -57,8 +50,24 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
-  field_os2web_spotbox_link_text:
+  field_os2web_spotbox_link_ext:
     weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_os2web_spotbox_link_int:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_os2web_spotbox_link_text:
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -66,7 +75,7 @@ content:
     type: text_textfield
     region: content
   field_os2web_spotbox_link_title:
-    weight: 4
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -74,13 +83,20 @@ content:
     type: string_textfield
     region: content
   field_os2web_spotbox_video:
-    weight: 7
+    weight: 10
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   name:
     type: string_textfield
     weight: 0
@@ -91,7 +107,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 12
     region: content
     settings:
       display_label: true
@@ -104,7 +120,7 @@ content:
     third_party_settings: {  }
   user_id:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60

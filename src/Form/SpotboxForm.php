@@ -44,7 +44,7 @@ class SpotboxForm extends ContentEntityForm {
     $types = $this->entity->getTypes();
     $type_value = $form_state->getValue('type');
     $type = empty($type_value[0]['value']) ? NULL : $type_value[0]['value'];
-    $fields = isset($types[$type]['fields']) ? $types[$type]['fields'] : [];
+    $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
     if (empty($type)) {
       $form['actions']['submit']['#disabled'] = TRUE;
     }
@@ -59,6 +59,11 @@ class SpotboxForm extends ContentEntityForm {
         'select[name="field_os2web_spotbox_link"]' => ['value' => 'internal'],
       ]
     ];
+    $form['field_os2web_spotbox_link_ext']['#states'] = [
+      'visible' => [
+        'select[name="field_os2web_spotbox_link"]' => ['value' => 'external'],
+      ]
+    ];
     $form['os2web-spotbox-form-wrapper'] = [
       '#type' => 'container',
       '#attributes' => ['id' => 'os2web-spotbox-form-wrapper'],
@@ -68,7 +73,7 @@ class SpotboxForm extends ContentEntityForm {
         continue;
       }
       if (strpos($element, 'field_os2web_spotbox') === FALSE
-        || in_array($element, $fields)) {
+        || (!in_array($element, $disabled_fields) && !empty($disabled_fields))) {
         $form['os2web-spotbox-form-wrapper'][$element] = $form[$element];
         unset($form[$element]);
         continue;

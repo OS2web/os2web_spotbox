@@ -5,6 +5,7 @@ dependencies:
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_image
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
+    - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_ext
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_int
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_title
@@ -38,6 +39,18 @@ content:
     region: content
   field_os2web_spotbox_link_butt:
     weight: 4
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_os2web_spotbox_link_ext:
+    weight: 8
     label: above
     settings:
       trim_length: 80
@@ -87,11 +100,5 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  user_id:
-    label: hidden
-    type: author
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true
