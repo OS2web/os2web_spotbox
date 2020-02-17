@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * OS2Web Spotbox module file.
+ */
+
+use Drupal\os2web_spotbox\Form\SpotboxForm;
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function os2web_spotbox_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if ($entity_form['#entity_type'] == 'os2web_spotbox') {
+    SpotboxForm::adjustForm($entity_form, $form_state);
+  }
+}

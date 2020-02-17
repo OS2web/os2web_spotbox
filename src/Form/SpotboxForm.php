@@ -2,9 +2,11 @@
 
 namespace Drupal\os2web_spotbox\Form;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\os2web_spotbox\Entity\Spotbox;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -37,49 +39,8 @@ class SpotboxForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var \Drupal\os2web_spotbox\Entity\Spotbox $entity */
     $form = parent::buildForm($form, $form_state);
-    $form['type']['widget']['#ajax'] = [
-      'callback' => '::ajaxCallback',
-      'wrapper' => 'os2web-spotbox-form-wrapper',
-    ];
-    $types = $this->entity->getTypes();
-    $type_value = $form_state->getValue('type');
-    $type = empty($type_value[0]['value']) ? NULL : $type_value[0]['value'];
-    $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
-    if (empty($type)) {
-      $form['actions']['submit']['#disabled'] = TRUE;
-    }
 
-    $form['field_os2web_spotbox_link_title']['#states'] = [
-      'invisible' => [
-        'select[name="field_os2web_spotbox_link"]' => ['value' => 'no_link'],
-      ]
-    ];
-    $form['field_os2web_spotbox_link_int']['#states'] = [
-      'visible' => [
-        'select[name="field_os2web_spotbox_link"]' => ['value' => 'internal'],
-      ]
-    ];
-    $form['field_os2web_spotbox_link_ext']['#states'] = [
-      'visible' => [
-        'select[name="field_os2web_spotbox_link"]' => ['value' => 'external'],
-      ]
-    ];
-    $form['os2web-spotbox-form-wrapper'] = [
-      '#type' => 'container',
-      '#attributes' => ['id' => 'os2web-spotbox-form-wrapper'],
-    ];
-    foreach (Element::children($form) as $element) {
-      if ($element == 'os2web-spotbox-form-wrapper') {
-        continue;
-      }
-      if (strpos($element, 'field_os2web_spotbox') === FALSE
-        || (!in_array($element, $disabled_fields) && !empty($disabled_fields))) {
-        $form['os2web-spotbox-form-wrapper'][$element] = $form[$element];
-        unset($form[$element]);
-        continue;
-      }
-      $form[$element]['#access'] = FALSE;
-    }
+    self::adjustForm($form, $form_state);
 
     if (!$this->entity->isNew()) {
       $form['new_revision'] = [
@@ -129,6 +90,92 @@ class SpotboxForm extends ContentEntityForm {
   }
 
   public function ajaxCallback(array $form, FormStateInterface $form_state) {
-    return $form['os2web-spotbox-form-wrapper'];
+    $triggering_element = $form_state->getTriggeringElement();
+    $spotbox_form_parents = [];
+    foreach ($triggering_element['#field_parents'] as $key) {
+      $spotbox_form_parents[] = $key;
+      if (strpos($key, 'field_') === 0) {
+        $spotbox_form_parents[] = 'widget';
+      }
+    }
+    $spotbox_form = NestedArray::getValue($form, $spotbox_form_parents);
+    $wrapper = static::getFormWrapperId($spotbox_form);
+    return $spotbox_form[$wrapper];
   }
+
+  /**
+   * Function that do adjust form for custom view.
+   *
+   * @param array $form
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   */
+  public static function adjustForm(array &$form, FormStateInterface $form_state) {
+    $wrapper_id = static::getFormWrapperId($form);
+    $form['type']['widget']['#ajax'] = [
+      'callback' => [static::class, 'ajaxCallback'],
+      'wrapper' => $wrapper_id,
+    ];
+    $types = Spotbox::getTypes();
+    $type =  NestedArray::getValue($form_state->getUserInput(), $form['type']['widget']['#parents']);
+    $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
+    if (empty($type)) {
+      $form['actions']['submit']['#disabled'] = TRUE;
+    }
+
+    $form['field_os2web_spotbox_link']['widget']['#ajax'] = [
+      'callback' => [static::class, 'ajaxCallback'],
+      'wrapper' => $wrapper_id,
+    ];
+    $link_type =  NestedArray::getValue($form_state->getUserInput(), $form['field_os2web_spotbox_link']['widget']['#parents']);
+    switch ($link_type) {
+      case 'no_link':
+        $form['field_os2web_spotbox_link_title']['#access'] = FALSE;
+        $form['field_os2web_spotbox_link_ext']['#access'] = FALSE;
+        $form['field_os2web_spotbox_link_int']['#access'] = FALSE;
+        break;
+
+      case 'internal':
+        $form['field_os2web_spotbox_link_ext']['#access'] = FALSE;
+        break;
+
+      case 'external':
+        $form['field_os2web_spotbox_link_int']['#access'] = FALSE;
+        break;
+    }
+
+    $form[$wrapper_id] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => $wrapper_id],
+    ];
+    foreach (Element::children($form) as $element) {
+      if ($element == $wrapper_id) {
+        continue;
+      }
+      if (strpos($element, 'field_os2web_spotbox') === FALSE
+        || (!in_array($element, $disabled_fields) && !empty($disabled_fields))) {
+        $form[$wrapper_id][$element] = $form[$element];
+        unset($form[$element]);
+        continue;
+      }
+      $form[$element]['#access'] = FALSE;
+    }
+  }
+
+  /**
+   * Gets forms wrapper id.
+   *
+   * @param array $form
+   *
+   * @return string
+   *   Forms wrapper id.
+   */
+  public static function getFormWrapperId(array $form) {
+    $wrapper_id = 'os2web-spotbox-form-wrapper';
+    if ($form['#ief_id']) {
+      $wrapper_id .= '-'. $form['#ief_id'];
+    }
+
+    return $wrapper_id;
+  }
+
 }
