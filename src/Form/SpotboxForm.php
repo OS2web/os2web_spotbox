@@ -4,9 +4,11 @@ namespace Drupal\os2web_spotbox\Form;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\os2web_spotbox\Entity\Spotbox;
+use Drupal\os2web_spotbox\Entity\SpotboxInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -98,6 +100,8 @@ class SpotboxForm extends ContentEntityForm {
         $spotbox_form_parents[] = 'widget';
       }
     }
+    // @TODO Integration with Inline entity forms still works not well
+    // on edit mode.
     $spotbox_form = NestedArray::getValue($form, $spotbox_form_parents);
     $wrapper = static::getFormWrapperId($spotbox_form);
     return $spotbox_form[$wrapper];
@@ -110,23 +114,46 @@ class SpotboxForm extends ContentEntityForm {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    */
   public static function adjustForm(array &$form, FormStateInterface $form_state) {
+    if (!empty($form['#type']) && $form['#default_value'] instanceof SpotboxInterface) {
+      $entity = $form['#default_value'];
+    }
+    elseif ($form_state->getFormObject()->getEntity() instanceof SpotboxInterface) {
+      $entity = $form_state->getFormObject()->getEntity();
+    }
     $wrapper_id = static::getFormWrapperId($form);
     $form['type']['widget']['#ajax'] = [
       'callback' => [static::class, 'ajaxCallback'],
       'wrapper' => $wrapper_id,
     ];
+
     $types = Spotbox::getTypes();
     $type =  NestedArray::getValue($form_state->getUserInput(), $form['type']['widget']['#parents']);
-    $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
     if (empty($type)) {
-      $form['actions']['submit']['#disabled'] = TRUE;
+      if ($entity instanceof SpotboxInterface && !$entity->get('type')->isEmpty()) {
+        $type = $entity->get('type')->first()->value;
+      }
     }
+
+    $form['actions']['submit']['#disabled'] = empty($type);
+
+    $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
 
     $form['field_os2web_spotbox_link']['widget']['#ajax'] = [
       'callback' => [static::class, 'ajaxCallback'],
       'wrapper' => $wrapper_id,
     ];
+
+    /** @var \Drupal\Core\Field\FieldItemListInterface $field_os2web_spotbox_link */
+    $field_os2web_spotbox_link = $entity->field_os2web_spotbox_link;
     $link_type =  NestedArray::getValue($form_state->getUserInput(), $form['field_os2web_spotbox_link']['widget']['#parents']);
+    if (empty($link_type)) {
+      if ($field_os2web_spotbox_link instanceof FieldItemListInterface && !$field_os2web_spotbox_link->isEmpty()) {
+        $link_type = $field_os2web_spotbox_link->first()->value;
+      }
+      else {
+        $link_type = 'no_link';
+      }
+    }
     switch ($link_type) {
       case 'no_link':
         $form['field_os2web_spotbox_link_title']['#access'] = FALSE;
