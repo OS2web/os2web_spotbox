@@ -2,7 +2,8 @@ langcode: da
 status: true
 dependencies: {  }
 id: os2web_spotbox
-label: 'OS2Web spotbox'
+label: Spotbox
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
