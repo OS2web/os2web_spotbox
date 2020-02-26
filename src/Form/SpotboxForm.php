@@ -198,7 +198,7 @@ class SpotboxForm extends ContentEntityForm {
    */
   public static function getFormWrapperId(array $form) {
     $wrapper_id = 'os2web-spotbox-form-wrapper';
-    if ($form['#ief_id']) {
+    if (!empty($form['#ief_id'])) {
       $wrapper_id .= '-'. $form['#ief_id'];
     }
 
