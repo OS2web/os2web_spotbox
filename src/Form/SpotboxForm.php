@@ -4,7 +4,6 @@ namespace Drupal\os2web_spotbox\Form;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityForm;
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\os2web_spotbox\Entity\Spotbox;
@@ -137,38 +136,6 @@ class SpotboxForm extends ContentEntityForm {
     $form['actions']['submit']['#disabled'] = empty($type);
 
     $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
-
-    $form['field_os2web_spotbox_link']['widget']['#ajax'] = [
-      'callback' => [static::class, 'ajaxCallback'],
-      'wrapper' => $wrapper_id,
-    ];
-
-    /** @var \Drupal\Core\Field\FieldItemListInterface $field_os2web_spotbox_link */
-    $field_os2web_spotbox_link = $entity->field_os2web_spotbox_link;
-    $link_type =  NestedArray::getValue($form_state->getUserInput(), $form['field_os2web_spotbox_link']['widget']['#parents']);
-    if (empty($link_type)) {
-      if ($field_os2web_spotbox_link instanceof FieldItemListInterface && !$field_os2web_spotbox_link->isEmpty()) {
-        $link_type = $field_os2web_spotbox_link->first()->value;
-      }
-      else {
-        $link_type = 'no_link';
-      }
-    }
-    switch ($link_type) {
-      case 'no_link':
-        $form['field_os2web_spotbox_link_title']['#access'] = FALSE;
-        $form['field_os2web_spotbox_link_ext']['#access'] = FALSE;
-        $form['field_os2web_spotbox_link_int']['#access'] = FALSE;
-        break;
-
-      case 'internal':
-        $form['field_os2web_spotbox_link_ext']['#access'] = FALSE;
-        break;
-
-      case 'external':
-        $form['field_os2web_spotbox_link_int']['#access'] = FALSE;
-        break;
-    }
 
     $form[$wrapper_id] = [
       '#type' => 'container',

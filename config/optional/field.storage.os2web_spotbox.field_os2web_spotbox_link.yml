@@ -2,25 +2,14 @@ langcode: da
 status: true
 dependencies:
   module:
-    - options
+    - link
     - os2web_spotbox
 id: os2web_spotbox.field_os2web_spotbox_link
 field_name: field_os2web_spotbox_link
 entity_type: os2web_spotbox
-type: list_string
-settings:
-  allowed_values:
-    -
-      value: no_link
-      label: 'Ingen link'
-    -
-      value: internal
-      label: 'Internt link'
-    -
-      value: external
-      label: 'Eksternt link'
-  allowed_values_function: ''
-module: options
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true

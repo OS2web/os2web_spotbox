@@ -4,19 +4,19 @@ dependencies:
   config:
     - field.storage.os2web_spotbox.field_os2web_spotbox_link
   module:
-    - options
+    - link
     - os2web_spotbox
 id: os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link
 field_name: field_os2web_spotbox_link
 entity_type: os2web_spotbox
 bundle: os2web_spotbox
-label: Link
+label: 'Spotboks Link'
 description: ''
-required: true
+required: false
 translatable: false
-default_value:
-  -
-    value: no_link
+default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: list_string
+settings:
+  link_type: 17
+  title: 0
+field_type: link
