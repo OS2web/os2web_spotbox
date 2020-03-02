@@ -3,18 +3,54 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.os2web_spotbox.field_os2web_spotbox
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_heading
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_post_body
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_pre_body
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_subheading
     - paragraphs.paragraphs_type.os2web_spotbox
+  module:
+    - text
 id: paragraph.os2web_spotbox.default
 targetEntityType: paragraph
 bundle: os2web_spotbox
 mode: default
 content:
   field_os2web_spotbox:
-    weight: 0
-    label: above
+    weight: 3
+    label: hidden
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
+    region: content
+  field_os2web_spotbox_heading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_os2web_spotbox_post_body:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_os2web_spotbox_pre_body:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_os2web_spotbox_subheading:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
 hidden: {  }

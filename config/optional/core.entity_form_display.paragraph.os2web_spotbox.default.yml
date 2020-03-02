@@ -3,7 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.os2web_spotbox.field_os2web_spotbox
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_heading
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_post_body
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_pre_body
+    - field.field.paragraph.os2web_spotbox.field_os2web_spotbox_subheading
     - paragraphs.paragraphs_type.os2web_spotbox
+  module:
+    - text
 id: paragraph.os2web_spotbox.default
 targetEntityType: paragraph
 bundle: os2web_spotbox
@@ -18,6 +24,38 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_os2web_spotbox_heading:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_spotbox_post_body:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_os2web_spotbox_pre_body:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_os2web_spotbox_subheading:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
 hidden:
   created: true
