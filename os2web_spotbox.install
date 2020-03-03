@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for os2web_spotbox module.
+ */
+
+/**
+ * Updates os2web_spotbox.
+ */
+function os2web_spotbox_update_8001() {
+  \Drupal::service('module_installer')->install(['media_library']);
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.os2web_spotbox.os2web_spotbox.default',
+    'entity_form_display',
+    'os2web_spotbox.os2web_spotbox.default', [
+    'field_os2web_spotbox_image' => 'content.field_os2web_spotbox_image',
+    'field_os2web_spotbox_link' => 'content.field_os2web_spotbox_link',
+    'field_os2web_spotbox_link_butt' => 'content.field_os2web_spotbox_link_butt',
+    'field_os2web_spotbox_link_text' => 'content.field_os2web_spotbox_link_text',
+    'field_os2web_spotbox_video' => 'content.field_os2web_spotbox_video',
+  ]);
+}

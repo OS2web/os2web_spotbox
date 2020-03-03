@@ -6,6 +6,9 @@
  */
 
 use Drupal\os2web_spotbox\Form\SpotboxForm;
+use Drupal\Component\Utility\NestedArray;
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -13,4 +16,46 @@ function os2web_spotbox_inline_entity_form_entity_form_alter(&$entity_form, &$fo
   if ($entity_form['#entity_type'] == 'os2web_spotbox') {
     SpotboxForm::adjustForm($entity_form, $form_state);
   }
+}
+
+/**
+ * Update entity from yml.
+ *
+ * Some config like form display needs to be updated via config manager.
+ *
+ * @param string $ymlFileName
+ *   Yml file name.
+ * @param string $entityType
+ *   The entity type for this storage.
+ * @param mixed $id
+ *   The ID of the entity to load.
+ * @param array $setComponents
+ *   Array of components you want to add.
+ *   - The key will be what we are setting.
+ *   - The value is the key that will be used from the new config file
+ *     (Can have in string for array).
+ *
+ * @throws
+ */
+function os2web_spotbox_update_entity_from_yml($ymlFileName, $entityType, $id, array $setComponents) {
+  $yml = Yaml::parse(file_get_contents(drupal_get_path('module', 'os2web_spotbox') . '/config/optional/' . $ymlFileName . '.yml'));
+  $entity = \Drupal::entityTypeManager()
+    ->getStorage($entityType)
+    ->load($id);
+  foreach ($setComponents as $key => $value) {
+    $parts = explode('.', $value);
+    if (count($parts) == 1) {
+      $entity->setComponent($key, $yml[$value]);
+    }
+    else {
+      $value = NestedArray::getValue($yml, $parts);
+      if (empty($value)) {
+        \Drupal::service('messenger')->addWarning('Component ' . $key . ' has empty configuration');
+        continue;
+      }
+      $entity->setComponent($key, $value);
+    }
+  }
+
+  $entity->save();
 }
