@@ -1,0 +1,29 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.os2web_spotbox
+    - field.field.media.image.field_media_image
+    - media.type.image
+  module:
+    - image
+id: media.image.os2web_spotbox
+targetEntityType: media
+bundle: image
+mode: os2web_spotbox
+content:
+  field_media_image:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

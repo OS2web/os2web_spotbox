@@ -225,7 +225,8 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
           'placeholder' => '',
         ],
       ])
-      ->setDisplayConfigurable('form', TRUE);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))

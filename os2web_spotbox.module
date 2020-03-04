@@ -50,7 +50,7 @@ function os2web_spotbox_update_entity_from_yml($ymlFileName, $entityType, $id, a
     else {
       $value = NestedArray::getValue($yml, $parts);
       if (empty($value)) {
-        \Drupal::service('messenger')->addWarning('Component ' . $key . ' has empty configuration');
+        \Drupal::messenger()->addWarning('Component ' . $key . ' has empty configuration');
         continue;
       }
       $entity->setComponent($key, $value);
