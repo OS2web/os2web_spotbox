@@ -10,8 +10,8 @@ dependencies:
   module:
     - link
     - options
+    - os2web_spotbox
     - text
-    - user
 id: os2web_spotbox.os2web_spotbox.default
 targetEntityType: os2web_spotbox
 bundle: os2web_spotbox

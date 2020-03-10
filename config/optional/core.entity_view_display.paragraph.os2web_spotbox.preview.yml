@@ -2,20 +2,20 @@ langcode: da
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.os2web_spotbox.field_os2web_spotbox
     - paragraphs.paragraphs_type.os2web_spotbox
-id: paragraph.os2web_spotbox.default
+id: paragraph.os2web_spotbox.preview
 targetEntityType: paragraph
 bundle: os2web_spotbox
-mode: default
+mode: preview
 content:
   field_os2web_spotbox:
-    weight: 3
-    label: hidden
-    settings:
-      link: true
-      view_mode: default
-    third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: entity_reference_label
+    weight: 1
     region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
 hidden: {  }

@@ -6,5 +6,7 @@ dependencies:
   - options
   - link
   - media
+  - media_library
+  - crop
   - paragraphs
   - inline_entity_form

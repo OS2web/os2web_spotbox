@@ -5,7 +5,8 @@
   "require": {
     "drupal/core": "*",
     "drupal/inline_entity_form": "^1.0@RC",
-    "drupal/paragraphs": "*"
+    "drupal/paragraphs": "*",
+    "drupal/crop": "*"
   },
   "license": "EUPL-1.2",
   "minimum-stability": "dev"

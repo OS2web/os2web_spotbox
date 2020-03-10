@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.os2web_spotbox
     - field.field.media.image.field_media_image
+    - image.style.os2web_medium
     - media.type.image
   module:
     - image
@@ -18,7 +19,7 @@ content:
     region: content
     label: hidden
     settings:
-      image_style: ''
+      image_style: os2web_medium
       image_link: ''
     third_party_settings: {  }
 hidden:
