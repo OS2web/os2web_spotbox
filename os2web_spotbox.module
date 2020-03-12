@@ -8,6 +8,7 @@
 use Drupal\os2web_spotbox\Form\SpotboxForm;
 use Drupal\Component\Utility\NestedArray;
 use Symfony\Component\Yaml\Yaml;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -58,4 +59,53 @@ function os2web_spotbox_update_entity_from_yml($ymlFileName, $entityType, $id, a
   }
 
   $entity->save();
+}
+
+/**
+ * Implements hook_theme().
+ */
+function os2web_spotbox_theme() {
+  return [
+    'os2web_spotbox' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function os2web_spotbox_theme_suggestions_os2web_spotbox(array $variables) {
+  $suggestions = [];
+  $spotbox = $variables['elements']['#os2web_spotbox'];
+  $type = $spotbox->getType();
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'os2web_spotbox__' . $type;
+  $suggestions[] = 'os2web_spotbox__' . $type . '__' . $sanitized_view_mode;
+  $suggestions[] = 'os2web_spotbox__' . $type . '__' . $spotbox->id();
+  $suggestions[] = 'os2web_spotbox__' . $type . '__' . $spotbox->id() . '__' . $sanitized_view_mode;
+
+  return $suggestions;
+}
+
+/**
+ * Prepares variables for OS2Web Spotbox templates.
+ *
+ * Default template: os2web_spotbox.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_os2web_spotbox(array &$variables) {
+  // Fetch Spotbox Entity Object.
+  $os2web_spotbox = $variables['elements']['#os2web_spotbox'];
+  $variables['spotbox'] = $os2web_spotbox;
+  $variables['spotbox_type'] = $os2web_spotbox->getType();
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
 }

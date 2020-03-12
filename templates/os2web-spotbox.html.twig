@@ -15,7 +15,11 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes.addClass('os2web_spotbox') }}>
+{% set classes = [
+  'os2web-spotbox',
+  'os2web-spotbox--' ~ spotbox_type,
+] %}
+<div{{ attributes.addClass(classes) }}>
   {% if content %}
     {{- content -}}
   {% endif %}
