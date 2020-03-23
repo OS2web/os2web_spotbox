@@ -20,6 +20,8 @@
   'os2web-spotbox--' ~ spotbox_type,
 ] %}
 <div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
   {% if content %}
     {{- content -}}
   {% endif %}
