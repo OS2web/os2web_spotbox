@@ -108,3 +108,52 @@ function os2web_spotbox_update_8004() {
     'field_os2web_spotbox' => 'content.field_os2web_spotbox',
   ]);
 }
+
+/**
+ * Update os2web_spotbox entity image field.
+ */
+function os2web_spotbox_update_8005() {
+  // Remove outdated fields.
+  $fields = [
+    'field_os2web_spotbox_image',
+  ];
+  foreach ($fields as $field_name) {
+    $field = \Drupal::entityTypeManager()
+      ->getStorage('field_config')
+      ->load('os2web_spotbox.os2web_spotbox.' . $field_name);
+    if (empty($field)) {
+      \Drupal::messenger()->addWarning(t('Field :field not found', [':field' => $field_name]));
+      continue;
+    }
+    $field->delete();
+    field_purge_field($field);
+  }
+
+  // Add new fields.
+  $path = drupal_get_path('module', 'os2web_spotbox');
+  // Create field storage.
+  $field_storage_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.storage.os2web_spotbox.field_os2web_spotbox_bg_image.yml'));
+  if (!FieldStorageConfig::loadByName($field_storage_yml['entity_type'], $field_storage_yml['field_name'])) {
+    FieldStorageConfig::create($field_storage_yml)->save();
+  }
+  // Create field instance.
+  $field_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_bg_image.yml'));
+  if (!FieldConfig::loadByName($field_yml['entity_type'], $field_yml['bundle'], $field_yml['field_name'])) {
+    FieldConfig::create($field_yml)->save();
+  }
+
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.paragraph.os2web_spotbox.default',
+    'entity_form_display',
+    'paragraph.os2web_spotbox.default', [
+    'field_os2web_spotbox' => 'content.field_os2web_spotbox_bg_image',
+  ]);
+
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_view_display.paragraph.os2web_spotbox.default',
+    'entity_view_display',
+    'paragraph.os2web_spotbox.default', [
+    'field_os2web_spotbox' => 'content.field_os2web_spotbox_bg_image',
+  ]);
+
+}

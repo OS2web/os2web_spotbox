@@ -2,14 +2,15 @@ langcode: da
 status: true
 dependencies:
   config:
-    - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_image
+    - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_bg_image
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_video
+    - image.style.os2web_medium
   module:
+    - image
     - link
-    - options
     - os2web_spotbox
     - text
 id: os2web_spotbox.os2web_spotbox.default
@@ -17,14 +18,19 @@ targetEntityType: os2web_spotbox
 bundle: os2web_spotbox
 mode: default
 content:
-  field_os2web_spotbox_image:
-    type: entity_reference_entity_view
-    weight: 0
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_os2web_spotbox_bg_image:
+    weight: 5
     label: hidden
     settings:
-      view_mode: os2web_spotbox
-      link: false
+      image_style: os2web_medium
+      image_link: ''
     third_party_settings: {  }
+    type: image
     region: content
   field_os2web_spotbox_link:
     type: link

@@ -6,6 +6,7 @@
     "drupal/core": "*",
     "drupal/inline_entity_form": "^1.0@RC",
     "drupal/paragraphs": "*",
+    "drupal/image_widget_crop": "*",
     "drupal/crop": "*"
   },
   "license": "EUPL-1.2",
