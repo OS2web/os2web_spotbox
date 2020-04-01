@@ -143,17 +143,17 @@ function os2web_spotbox_update_8005() {
   }
 
   os2web_spotbox_update_entity_from_yml(
-    'core.entity_form_display.paragraph.os2web_spotbox.default',
+    'core.entity_form_display.os2web_spotbox.os2web_spotbox.default',
     'entity_form_display',
-    'paragraph.os2web_spotbox.default', [
-    'field_os2web_spotbox' => 'content.field_os2web_spotbox_bg_image',
+    'os2web_spotbox.os2web_spotbox.default', [
+    'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
   ]);
 
   os2web_spotbox_update_entity_from_yml(
-    'core.entity_view_display.paragraph.os2web_spotbox.default',
+    'core.entity_view_display.os2web_spotbox.os2web_spotbox.default',
     'entity_view_display',
-    'paragraph.os2web_spotbox.default', [
-    'field_os2web_spotbox' => 'content.field_os2web_spotbox_bg_image',
+    'os2web_spotbox.os2web_spotbox.default', [
+    'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
   ]);
 
 }
