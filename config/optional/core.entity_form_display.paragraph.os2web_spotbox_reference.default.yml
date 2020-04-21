@@ -1,0 +1,33 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference
+    - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference_h
+    - paragraphs.paragraphs_type.os2web_spotbox_reference
+id: paragraph.os2web_spotbox_reference.default
+targetEntityType: paragraph
+bundle: os2web_spotbox_reference
+mode: default
+content:
+  field_os2web_spotbox_reference_h:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_spotbox_reference:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

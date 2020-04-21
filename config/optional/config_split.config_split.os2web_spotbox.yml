@@ -1,0 +1,17 @@
+langcode: da
+status: true
+dependencies: {  }
+id: os2web_spotbox
+label: 'OS2Web Spotbox'
+description: ''
+folder: modules/contrib/os2web_spotbox/config/optional
+module: {  }
+theme: {  }
+blacklist:
+  - 'os2web_spotbox*'
+  - '*os2web_spotbox'
+  - '*os2web_spotbox*'
+graylist: {  }
+graylist_dependents: false
+graylist_skip_equal: false
+weight: 0
