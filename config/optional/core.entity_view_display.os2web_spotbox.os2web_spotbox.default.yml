@@ -24,7 +24,7 @@ content:
     third_party_settings: {  }
     region: content
   field_os2web_spotbox_bg_image:
-    weight: 5
+    weight: 2
     label: hidden
     settings:
       image_style: os2web_medium
@@ -34,7 +34,7 @@ content:
     region: content
   field_os2web_spotbox_link:
     type: link
-    weight: 4
+    weight: 0
     region: content
     label: hidden
     settings:
@@ -44,20 +44,8 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-  field_os2web_spotbox_link_butt:
-    weight: 1
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
   field_os2web_spotbox_link_text:
-    weight: 2
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -76,5 +64,6 @@ content:
     type: link
     region: content
 hidden:
+  field_os2web_spotbox_link_butt: true
   langcode: true
   user_id: true
