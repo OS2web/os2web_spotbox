@@ -1,6 +1,7 @@
 langcode: da
 status: true
-dependencies: {  }
+dependencies:
+  - config_split
 id: os2web_spotbox
 label: 'OS2Web Spotbox'
 description: ''

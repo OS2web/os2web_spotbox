@@ -305,7 +305,6 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
       'image' => [
         'label' => t('Billede'),
         'disabled_fields' => [
-          'field_os2web_spotbox_link_text',
           'field_os2web_spotbox_video',
           'field_os2web_spotbox_link_butt',
         ],
@@ -317,11 +316,17 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
           'field_os2web_spotbox_link_butt',
         ],
       ],
-      'buttons' => [
-        'label' => t('Knapper'),
+      'button' => [
+        'label' => t('Knap'),
         'disabled_fields' => [
-          'field_os2web_spotbox_link_text',
           'field_os2web_spotbox_video',
+        ],
+      ],
+      'icon' => [
+        'label' => t('Ikon'),
+        'disabled_fields' => [
+          'field_os2web_spotbox_video',
+          'field_os2web_spotbox_link_butt',
         ],
       ],
     ];
