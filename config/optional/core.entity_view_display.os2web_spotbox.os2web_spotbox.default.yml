@@ -7,7 +7,7 @@ dependencies:
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_video
-    - image.style.os2web_medium
+    - image.style.os2web_spotbox_image
   module:
     - image
     - link
@@ -27,7 +27,7 @@ content:
     weight: 2
     label: hidden
     settings:
-      image_style: os2web_medium
+      image_style: os2web_spotbox_image
       image_link: ''
     third_party_settings: {  }
     type: image

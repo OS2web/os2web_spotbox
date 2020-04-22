@@ -7,7 +7,7 @@ dependencies:
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_video
-    - image.style.thumbnail
+    - image.style.os2web_spotbox_image
   module:
     - image_widget_crop
     - link
@@ -23,12 +23,12 @@ content:
     settings:
       show_default_crop: true
       warn_multiple_usages: true
-      preview_image_style: thumbnail
+      preview_image_style: os2web_spotbox_image
       crop_preview_image_style: crop_thumbnail
       crop_list:
-        - os2web_normal
+        - os2web_spotbox_image
       crop_types_required:
-        - os2web_normal
+        - os2web_spotbox_image
       progress_indicator: throbber
       show_crop_area: false
     third_party_settings: {  }

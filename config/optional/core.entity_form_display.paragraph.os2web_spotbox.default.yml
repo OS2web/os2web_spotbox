@@ -12,7 +12,9 @@ bundle: os2web_spotbox
 mode: default
 content:
   field_os2web_spotbox:
+    type: inline_entity_form_complex
     weight: 0
+    region: content
     settings:
       form_mode: default
       label_singular: ''
@@ -26,8 +28,6 @@ content:
       collapsed: false
       allow_duplicate: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
-    region: content
 hidden:
   created: true
   status: true

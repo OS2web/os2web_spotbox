@@ -10,14 +10,6 @@ targetEntityType: paragraph
 bundle: os2web_spotbox_reference
 mode: default
 content:
-  field_os2web_spotbox_reference_h:
-    weight: 0
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_os2web_spotbox_reference:
     weight: 1
     label: hidden
@@ -26,5 +18,13 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
+  field_os2web_spotbox_reference_h:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
 hidden: {  }
