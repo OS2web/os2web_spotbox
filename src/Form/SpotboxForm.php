@@ -125,6 +125,11 @@ class SpotboxForm extends ContentEntityForm {
       'wrapper' => $wrapper_id,
     ];
 
+    // Removing None option.
+    if (!empty($form['background_color']['widget']['#options']['_none'])) {
+      unset($form['background_color']['widget']['#options']['_none']);
+    }
+
     $types = Spotbox::getTypes();
     $type =  NestedArray::getValue($form_state->getUserInput(), $form['type']['widget']['#parents']);
     if (empty($type)) {
