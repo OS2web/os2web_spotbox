@@ -2,6 +2,8 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_ref_display
+    - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_ref_subhead
     - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference
     - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference_h
     - paragraphs.paragraphs_type.os2web_spotbox_reference
@@ -10,8 +12,15 @@ targetEntityType: paragraph
 bundle: os2web_spotbox_reference
 mode: default
 content:
-  field_os2web_spotbox_reference:
+  field_os2web_spotbox_ref_subhead:
     weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_os2web_spotbox_reference:
+    weight: 2
     label: hidden
     settings:
       view_mode: default
@@ -27,4 +36,5 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-hidden: {  }
+hidden:
+  field_os2web_spotbox_ref_display: true

@@ -11,11 +11,12 @@ bundle: os2web_spotbox
 mode: preview
 content:
   field_os2web_spotbox:
-    type: entity_reference_label
-    weight: 1
+    type: entity_reference_entity_view
+    weight: 0
     region: content
-    label: inline
+    label: hidden
     settings:
-      link: false
+      link: true
+      view_mode: default
     third_party_settings: {  }
 hidden: {  }
