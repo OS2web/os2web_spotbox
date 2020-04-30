@@ -8,10 +8,10 @@ id: paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference
 field_name: field_os2web_spotbox_reference
 entity_type: paragraph
 bundle: os2web_spotbox_reference
-label: 'Reference'
+label: Reference
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
