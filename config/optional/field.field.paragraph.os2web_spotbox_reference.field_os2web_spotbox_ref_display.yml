@@ -12,7 +12,7 @@ entity_type: paragraph
 bundle: os2web_spotbox_reference
 label: 'Visning type'
 description: ''
-required: false
+required: true
 translatable: false
 default_value:
   -
