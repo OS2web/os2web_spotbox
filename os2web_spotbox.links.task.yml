@@ -1,7 +1,7 @@
 # OS2Web Spotbox routing definition
 
 entity.os2web_spotbox.collection:
-  title: OS2Web Spotbox
+  title: Spotbox
   route_name: entity.os2web_spotbox.collection
   base_route: system.admin_content
 

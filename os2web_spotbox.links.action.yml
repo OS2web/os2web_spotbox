@@ -1,5 +1,5 @@
 entity.os2web_spotbox.add_form:
   route_name: entity.os2web_spotbox.add_form
-  title: 'Add OS2Web Spotbox'
+  title: 'Add Spotbox'
   appears_on:
     - entity.os2web_spotbox.collection

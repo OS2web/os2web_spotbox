@@ -18,7 +18,7 @@ use Drupal\user\UserInterface;
  *
  * @ContentEntityType(
  *   id = "os2web_spotbox",
- *   label = @Translation("OS2Web Spotbox"),
+ *   label = @Translation("Spotbox"),
  *   handlers = {
  *     "storage" = "Drupal\os2web_spotbox\SpotboxStorage",
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
@@ -253,6 +253,25 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
       ->setDisplayOptions('form', [
         'type' => 'options_select',
         'weight' => -5,
+      ])
+      ->setSetting('allowed_values', $allowed_values)
+      ->setDisplayConfigurable('form', TRUE);
+
+    $allowed_values = [
+      'transparent' => t('Ingen'),
+      'primary' => t('Primær'),
+      'secondary' => t('Sekundær'),
+      'tertiary' => t('Tertiær'),
+    ];
+    $fields['background_color'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Baggrundfarve'))
+      ->setDescription(t('Vælg baggrundsfarve.'))
+      ->setRequired(TRUE)
+      ->setDefaultValue('')
+      ->setReadOnly(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'options_select',
+        'weight' => -4,
       ])
       ->setSetting('allowed_values', $allowed_values)
       ->setDisplayConfigurable('form', TRUE);

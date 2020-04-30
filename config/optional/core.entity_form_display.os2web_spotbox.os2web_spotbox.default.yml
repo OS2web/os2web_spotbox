@@ -18,8 +18,14 @@ targetEntityType: os2web_spotbox
 bundle: os2web_spotbox
 mode: default
 content:
+  background_color:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_os2web_spotbox_bg_image:
-    weight: 3
+    weight: 4
     settings:
       show_default_crop: true
       warn_multiple_usages: true
@@ -35,7 +41,7 @@ content:
     type: image_widget_crop
     region: content
   field_os2web_spotbox_link:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -43,7 +49,7 @@ content:
     type: link_default
     region: content
   field_os2web_spotbox_link_text:
-    weight: 5
+    weight: 6
     settings:
       size: 60
       placeholder: ''
@@ -51,7 +57,7 @@ content:
     type: text_textfield
     region: content
   field_os2web_spotbox_video:
-    weight: 6
+    weight: 7
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -60,7 +66,7 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 3
     region: content
     settings:
       include_locked: true
@@ -81,7 +87,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true
@@ -94,7 +100,7 @@ content:
     third_party_settings: {  }
   user_id:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
