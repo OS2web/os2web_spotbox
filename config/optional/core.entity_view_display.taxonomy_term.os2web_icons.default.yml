@@ -1,0 +1,15 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.os2web_icons.field_os2web_icon_file
+    - taxonomy.vocabulary.os2web_icons
+id: taxonomy_term.os2web_icons.default
+targetEntityType: taxonomy_term
+bundle: os2web_icons
+mode: default
+content: {  }
+hidden:
+  description: true
+  field_os2web_icon_file: true
+  langcode: true

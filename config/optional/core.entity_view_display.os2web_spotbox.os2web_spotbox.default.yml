@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_bg_image
+    - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_icon
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_butt
     - field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_link_text
@@ -64,6 +65,7 @@ content:
     type: link
     region: content
 hidden:
+  field_os2web_spotbox_icon: true
   field_os2web_spotbox_link_butt: true
   langcode: true
   user_id: true

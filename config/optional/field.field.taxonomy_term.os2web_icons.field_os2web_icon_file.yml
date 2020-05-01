@@ -1,0 +1,26 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_os2web_icon_file
+    - taxonomy.vocabulary.os2web_icons
+  module:
+    - file
+id: taxonomy_term.os2web_icons.field_os2web_icon_file
+field_name: field_os2web_icon_file
+entity_type: taxonomy_term
+bundle: os2web_icons
+label: Ikon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: icons
+  file_extensions: svg
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

@@ -13,6 +13,9 @@ blacklist:
   - 'os2web_spotbox*'
   - '*os2web_spotbox'
   - '*os2web_spotbox*'
+  - 'os2web_icons*'
+  - '*os2web_icons'
+  - '*os2web_icons*'
 graylist: {  }
 graylist_dependents: false
 graylist_skip_equal: false
