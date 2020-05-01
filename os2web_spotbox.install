@@ -157,3 +157,37 @@ function os2web_spotbox_update_8005() {
   ]);
 
 }
+
+/**
+ * Adding background color to os2web_spotbox entity.
+ */
+function os2web_spotbox_update_8006(&$sandbox) {
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  /** @var \Drupal\Core\Entity\EntityLastInstalledSchemaRepositoryInterface $last_installed_schema_repository */
+  $last_installed_schema_repository = \Drupal::service('entity.last_installed_schema.repository');
+
+  $entity_type = $definition_update_manager->getEntityType('os2web_spotbox');
+  $field_storage_definitions = $last_installed_schema_repository->getLastInstalledFieldStorageDefinitions('os2web_spotbox');
+
+  $allowed_values = [
+    'transparent' => t('Ingen'),
+    'primary' => t('Primær'),
+    'secondary' => t('Sekundær'),
+    'tertiary' => t('Tertiær'),
+  ];
+  $field_storage_definitions['background_color'] = \Drupal\Core\Field\BaseFieldDefinition::create('list_string')
+    ->setLabel(t('Baggrundfarve'))
+    ->setDescription(t('Vælg baggrundsfarve.'))
+    ->setName('background_color')
+    ->setTargetEntityTypeId('os2web_spotbox')
+    ->setTargetBundle(NULL)
+    ->setRequired(TRUE)
+    ->setDefaultValue('transparent')
+    ->setReadOnly(TRUE)
+    ->setDisplayOptions('form', [
+      'type' => 'options_select',
+    ])
+    ->setSetting('allowed_values', $allowed_values)
+    ->setDisplayConfigurable('form', TRUE);
+  $definition_update_manager->updateFieldableEntityType($entity_type, $field_storage_definitions, $sandbox);
+}

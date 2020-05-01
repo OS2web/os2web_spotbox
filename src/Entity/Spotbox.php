@@ -153,6 +153,24 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
   /**
    * {@inheritdoc}
    */
+  public function getBackgroundColor() {
+    $definition =  $this->getFieldDefinition('background_color')->toArray();
+    $value = $this->get('background_color')->value;
+    //return $value == NULL ? $definition['default_value'] : $value
+    return $value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setBackgroundColor($background_color) {
+    $this->set('background_color', $background_color);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
@@ -267,7 +285,7 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
       ->setLabel(t('Baggrundfarve'))
       ->setDescription(t('Vælg baggrundsfarve.'))
       ->setRequired(TRUE)
-      ->setDefaultValue('')
+      ->setDefaultValue('transparent')
       ->setReadOnly(TRUE)
       ->setDisplayOptions('form', [
         'type' => 'options_select',

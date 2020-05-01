@@ -9,7 +9,7 @@ use Drupal\os2web_spotbox\Form\SpotboxForm;
 use Drupal\Component\Utility\NestedArray;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Render\Element;
-
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -104,8 +104,23 @@ function template_preprocess_os2web_spotbox(array &$variables) {
   $os2web_spotbox = $variables['elements']['#os2web_spotbox'];
   $variables['spotbox'] = $os2web_spotbox;
   $variables['spotbox_type'] = $os2web_spotbox->getType();
+  $variables['background_color'] = $os2web_spotbox->getBackgroundColor();
+
   // Helpful $content variable for templates.
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+
+  if ($os2web_spotbox->getType() == 'icon'
+    && $os2web_spotbox->field_os2web_spotbox_icon instanceof EntityReferenceFieldItemListInterface
+    && !$os2web_spotbox->field_os2web_spotbox_icon->isEmpty()) {
+    /** @var \Drupal\taxonomy\TermInterface*/
+    $entity = $os2web_spotbox->field_os2web_spotbox_icon->referencedEntities()[0];
+    if ($entity->field_os2web_icon_file instanceof EntityReferenceFieldItemListInterface
+    && !$entity->field_os2web_icon_file->isEmpty()) {
+      $file = $entity->field_os2web_icon_file->referencedEntities()[0];
+      $variables['icon_url'] = file_create_url($file->getFileUri());
+    }
   }
 }

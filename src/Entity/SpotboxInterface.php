@@ -58,6 +58,25 @@ interface SpotboxInterface extends ContentEntityInterface, RevisionLogInterface,
   public function setType($type);
 
   /**
+   * Gets the OS2Web Spotbox background color.
+   *
+   * @return string
+   *   Background color of the OS2Web Spotbox.
+   */
+  public function getBackgroundColor();
+
+  /**
+   * Sets the OS2Web Spotbox background color.
+   *
+   * @param string $background_color
+   *   The OS2Web Spotbox background color.
+   *
+   * @return \Drupal\os2web_spotbox\Entity\SpotboxInterface
+   *   The called OS2Web Spotbox entity.
+   */
+  public function setBackgroundColor($background_color);
+
+  /**
    * Gets the OS2Web Spotbox creation timestamp.
    *
    * @return int

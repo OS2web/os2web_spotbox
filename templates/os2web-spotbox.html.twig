@@ -18,6 +18,7 @@
 {% set classes = [
   'os2web-spotbox',
   'os2web-spotbox--' ~ spotbox_type,
+  background_color ? ('os2web-spotbox--background-color-' ~ background_color),
 ] %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
