@@ -147,7 +147,7 @@ class SpotboxForm extends ContentEntityForm {
       '#attributes' => ['id' => $wrapper_id],
     ];
     foreach (Element::children($form) as $element) {
-      if ($element == $wrapper_id) {
+      if ($element == $wrapper_id || $element == 'actions') {
         continue;
       }
       if (strpos($element, 'field_os2web_spotbox') === FALSE
