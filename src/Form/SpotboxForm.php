@@ -90,6 +90,9 @@ class SpotboxForm extends ContentEntityForm {
     $form_state->setRedirect('entity.os2web_spotbox.canonical', ['os2web_spotbox' => $entity->id()]);
   }
 
+  /**
+   * Implements ajax callback for spotbox form.
+   */
   public function ajaxCallback(array $form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     $spotbox_form_parents = [];
@@ -110,7 +113,9 @@ class SpotboxForm extends ContentEntityForm {
    * Function that do adjust form for custom view.
    *
    * @param array $form
+   *   Form array.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state object.
    */
   public static function adjustForm(array &$form, FormStateInterface $form_state) {
     if (!empty($form['#type']) && $form['#default_value'] instanceof SpotboxInterface) {
@@ -131,7 +136,7 @@ class SpotboxForm extends ContentEntityForm {
     }
 
     $types = Spotbox::getTypes();
-    $type =  NestedArray::getValue($form_state->getUserInput(), $form['type']['widget']['#parents']);
+    $type = NestedArray::getValue($form_state->getUserInput(), $form['type']['widget']['#parents']);
     if (empty($type)) {
       if ($entity instanceof SpotboxInterface && !$entity->get('type')->isEmpty()) {
         $type = $entity->get('type')->first()->value;
@@ -164,6 +169,7 @@ class SpotboxForm extends ContentEntityForm {
    * Gets forms wrapper id.
    *
    * @param array $form
+   *   Form array.
    *
    * @return string
    *   Forms wrapper id.
@@ -171,7 +177,7 @@ class SpotboxForm extends ContentEntityForm {
   public static function getFormWrapperId(array $form) {
     $wrapper_id = 'os2web-spotbox-form-wrapper';
     if (!empty($form['#ief_id'])) {
-      $wrapper_id .= '-'. $form['#ief_id'];
+      $wrapper_id .= '-' . $form['#ief_id'];
     }
 
     return $wrapper_id;

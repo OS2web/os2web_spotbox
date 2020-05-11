@@ -137,6 +137,8 @@ interface SpotboxInterface extends ContentEntityInterface, RevisionLogInterface,
    * Defines types for spotbox entity.
    *
    * @return array
+   *   Array with available types.
    */
-  static function getTypes();
+  public static function getTypes();
+
 }

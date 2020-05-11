@@ -154,10 +154,7 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
    * {@inheritdoc}
    */
   public function getBackgroundColor() {
-    $definition =  $this->getFieldDefinition('background_color')->toArray();
-    $value = $this->get('background_color')->value;
-    //return $value == NULL ? $definition['default_value'] : $value
-    return $value;
+    return $this->get('background_color')->value;
   }
 
   /**
@@ -322,7 +319,7 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
   /**
    * {@inheritdoc}
    */
-  static function getTypes() {
+  public static function getTypes() {
     return [
       'default' => [
         'label' => t('Standard'),
@@ -374,4 +371,5 @@ class Spotbox extends EditorialContentEntityBase implements SpotboxInterface {
       ],
     ];
   }
+
 }
