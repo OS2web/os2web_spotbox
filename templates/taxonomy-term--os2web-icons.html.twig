@@ -23,9 +23,4 @@
  * @see template_preprocess_taxonomy_term()
  */
 #}
-{% set classes = [
-    'taxonomy-term',
-    'vocabulary-' ~ term.bundle|clean_class,
-  ]
-%}
 {{ content }}
