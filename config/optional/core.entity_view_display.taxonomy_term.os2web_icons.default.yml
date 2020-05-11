@@ -17,7 +17,7 @@ content:
     settings:
       image_style: ''
       image_link: ''
-      svg_render_as_image: true
+      svg_render_as_image: false
       svg_attributes:
         width: null
         height: null
