@@ -69,6 +69,12 @@ function os2web_spotbox_theme() {
     'os2web_spotbox' => [
       'render element' => 'elements',
     ],
+    'taxonomy_term__os2web_icons' => [
+      'base hook' => 'taxonomy_term',
+    ],
+    'field__taxonomy_term__os2web_icons' => [
+      'base hook' => 'field',
+    ],
   ];
 }
 
@@ -109,18 +115,5 @@ function template_preprocess_os2web_spotbox(array &$variables) {
   // Helpful $content variable for templates.
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
-  }
-
-
-  if ($os2web_spotbox->getType() == 'icon'
-    && $os2web_spotbox->field_os2web_spotbox_icon instanceof EntityReferenceFieldItemListInterface
-    && !$os2web_spotbox->field_os2web_spotbox_icon->isEmpty()) {
-    /** @var \Drupal\taxonomy\TermInterface*/
-    $entity = $os2web_spotbox->field_os2web_spotbox_icon->referencedEntities()[0];
-    if ($entity->field_os2web_icon_file instanceof EntityReferenceFieldItemListInterface
-    && !$entity->field_os2web_icon_file->isEmpty()) {
-      $file = $entity->field_os2web_icon_file->referencedEntities()[0];
-      $variables['icon_url'] = file_create_url($file->getFileUri());
-    }
   }
 }
