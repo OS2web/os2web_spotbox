@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
 use Drupal\os2web_spotbox\Entity\SpotboxInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -118,13 +119,13 @@ class SpotboxController extends ControllerBase implements ContainerInjectionInte
         // Use revision link to link to revisions that are not active.
         $date = $this->dateFormatter->format($revision->getRevisionCreationTime(), 'short');
         if ($vid != $os2web_spotbox->getRevisionId()) {
-          $link = $this->l($date, new Url('entity.os2web_spotbox.revision', [
+          $link = Link::fromTextAndUrl($date, new Url('entity.os2web_spotbox.revision', [
             'os2web_spotbox' => $os2web_spotbox->id(),
             'os2web_spotbox_revision' => $vid,
           ]));
         }
         else {
-          $link = $os2web_spotbox->link($date);
+          $link = $os2web_spotbox->toLink($date)->toString();
         }
 
         $row = [];
