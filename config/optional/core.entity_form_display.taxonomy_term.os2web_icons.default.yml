@@ -3,9 +3,10 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.os2web_icons.field_os2web_icon_file
+    - image.style.thumbnail
     - taxonomy.vocabulary.os2web_icons
   module:
-    - file
+    - svg_image
 id: taxonomy_term.os2web_icons.default
 targetEntityType: taxonomy_term
 bundle: os2web_icons
@@ -15,8 +16,9 @@ content:
     weight: 1
     settings:
       progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: file_generic
+    type: image_image
     region: content
   name:
     type: string_textfield
