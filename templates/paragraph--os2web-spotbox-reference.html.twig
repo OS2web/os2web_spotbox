@@ -1,6 +1,7 @@
 {% set classes = [
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
+  paragraph.isPublished() ? 'paragraph--' ~ grid_type,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   paragraph.isPublished() ? null : 'paragraph--unpublished'
 ] %}
