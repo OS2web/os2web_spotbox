@@ -5,6 +5,7 @@
  * OS2Web Spotbox module file.
  */
 
+use Drupal\Core\Url;
 use Drupal\os2web_spotbox\Form\SpotboxForm;
 use Drupal\Component\Utility\NestedArray;
 use Symfony\Component\Yaml\Yaml;
@@ -111,6 +112,12 @@ function template_preprocess_os2web_spotbox(array &$variables) {
   $variables['spotbox'] = $os2web_spotbox;
   $variables['spotbox_type'] = $os2web_spotbox->getType();
   $variables['background_color'] = $os2web_spotbox->getBackgroundColor();
+  if (!empty($os2web_spotbox->field_os2web_spotbox_link)
+    && !$os2web_spotbox->field_os2web_spotbox_link->isEmpty())  {
+    $link = $os2web_spotbox->field_os2web_spotbox_link->first()->getValue();
+    $variables['spotbox_url'] = Url::fromUri($link['uri'], ['absolut' => TRUE]);
+    $variables['spotbox_heading'] = $link['title'];
+  }
 
   // Helpful $content variable for templates.
   foreach (Element::children($variables['elements']) as $key) {
