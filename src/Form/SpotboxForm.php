@@ -143,8 +143,6 @@ class SpotboxForm extends ContentEntityForm {
       }
     }
 
-    $form['actions']['submit']['#disabled'] = empty($type);
-
     $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
 
     $form[$wrapper_id] = [
