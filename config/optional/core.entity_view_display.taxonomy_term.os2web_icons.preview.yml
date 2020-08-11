@@ -1,0 +1,30 @@
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.preview
+    - field.field.taxonomy_term.os2web_icons.field_os2web_icon_file
+    - taxonomy.vocabulary.os2web_icons
+  module:
+    - svg_image
+id: taxonomy_term.os2web_icons.preview
+targetEntityType: taxonomy_term
+bundle: os2web_icons
+mode: preview
+content:
+  field_os2web_icon_file:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      svg_render_as_image: true
+      svg_attributes:
+        width: 50
+        height: 50
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
