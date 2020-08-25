@@ -6,11 +6,17 @@ administer os2web spotbox entities:
   description: 'Allow to access the administration form to configure OS2Web Spotbox entities.'
   restrict access: true
 
-delete os2web spotbox entities:
-  title: 'Delete OS2Web Spotbox entities'
+delete any os2web spotbox entities:
+  title: 'Delete any OS2Web Spotbox entities'
 
-edit os2web spotbox entities:
-  title: 'Edit OS2Web Spotbox entities'
+delete own os2web spotbox entities:
+  title: 'Delete own OS2Web Spotbox entities'
+
+edit any os2web spotbox entities:
+  title: 'Edit any OS2Web Spotbox entities'
+
+edit own os2web spotbox entities:
+  title: 'Edit own OS2Web Spotbox entities'
 
 view published os2web spotbox entities:
   title: 'View published OS2Web Spotbox entities'

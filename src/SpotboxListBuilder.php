@@ -16,6 +16,11 @@ class SpotboxListBuilder extends EntityListBuilder {
   /**
    * {@inheritdoc}
    */
+  protected $limit = 20;
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildHeader() {
     $header['id'] = $this->t('OS2Web Spotbox ID');
     $header['name'] = $this->t('Name');
@@ -34,6 +39,23 @@ class SpotboxListBuilder extends EntityListBuilder {
       ['os2web_spotbox' => $entity->id()]
     );
     return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * Loads entity IDs using a pager sorted by the entity id.
+   *
+   * @return array
+   *   An array of entity IDs.
+   */
+  protected function getEntityIds() {
+    $query = $this->getStorage()->getQuery()
+      ->sort($this->entityType->getKey('id'), 'DESC');
+
+    // Only add the pager if a limit is specified.
+    if ($this->limit) {
+      $query->pager($this->limit);
+    }
+    return $query->execute();
   }
 
 }

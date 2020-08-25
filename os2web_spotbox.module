@@ -6,11 +6,43 @@
  */
 
 use Drupal\Core\Url;
-use Drupal\os2web_spotbox\Form\SpotboxForm;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Component\Utility\NestedArray;
-use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\os2web_spotbox\Entity\SpotboxInterface;
+use Drupal\os2web_spotbox\Form\SpotboxForm;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function os2web_spobox_os2web_spotbox_access(SpotboxInterface $node, $op, AccountInterface $account) {
+  $type = $node->bundle();
+
+  // Note create access is handled by hook_ENTITY_TYPE_create_access().
+  switch ($op) {
+    case 'update':
+      $access = AccessResult::allowedIfHasPermission($account, 'edit any ' . $type . ' content');
+      if (!$access->isAllowed() && $account->hasPermission('edit own ' . $type . ' content')) {
+        $access = $access->orIf(AccessResult::allowedIf($account->id() == $node->getOwnerId())->cachePerUser()->addCacheableDependency($node));
+      }
+      break;
+
+    case 'delete':
+      $access = AccessResult::allowedIfHasPermission($account, 'delete any ' . $type . ' content');
+      if (!$access->isAllowed() && $account->hasPermission('delete own ' . $type . ' content')) {
+        $access = $access->orIf(AccessResult::allowedIf($account->id() == $node->getOwnerId()))->cachePerUser()->addCacheableDependency($node);
+      }
+      break;
+
+    default:
+      $access = AccessResult::neutral();
+  }
+
+  return $access;
+}
+
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */

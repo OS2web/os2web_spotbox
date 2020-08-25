@@ -31,12 +31,20 @@ class SpotboxAccessControlHandler extends EntityAccessControlHandler {
         return AccessResult::allowedIfHasPermission($account, 'view published os2web spotbox entities');
 
       case 'update':
+        $access = AccessResult::allowedIfHasPermission($account, 'edit any os2web spotbox entities');
+        if (!$access->isAllowed() && $account->hasPermission('edit own os2web spotbox entities')) {
+          $access = $access->orIf(AccessResult::allowedIf($account->id() == $entity->getOwnerId())->cachePerUser()->addCacheableDependency($entity));
+        }
 
-        return AccessResult::allowedIfHasPermission($account, 'edit os2web spotbox entities');
+        return $access;
 
       case 'delete':
+        $access = AccessResult::allowedIfHasPermission($account, 'delete any os2web spotbox entities');
+        if (!$access->isAllowed() && $account->hasPermission('delete own os2web spotbox entities')) {
+          $access = $access->orIf(AccessResult::allowedIf($account->id() == $entity->getOwnerId()))->cachePerUser()->addCacheableDependency($entity);
+        }
 
-        return AccessResult::allowedIfHasPermission($account, 'delete os2web spotbox entities');
+        return $access;
     }
 
     // Unknown operation, no opinion.
