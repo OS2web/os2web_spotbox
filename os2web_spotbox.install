@@ -8,6 +8,7 @@
 use Drupal\field\Entity\FieldStorageConfig;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\paragraphs\Entity\ParagraphsType;
 
 /**
  * Reads in new configuration.
@@ -193,19 +194,85 @@ function os2web_spotbox_update_8006(&$sandbox) {
 }
 
 /**
- * Update os2web_spotbox paragraphs form entity widget.
+ * Adding os2web_spotbox_reference paragraph to existing installation.
  */
 function os2web_spotbox_update_8901() {
-    os2web_spotbox_update_entity_from_yml(
-        'core.entity_form_display.paragraph.os2web_spotbox.default',
-        'entity_form_display',
-        'paragraph.os2web_spotbox.default', [
-        'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+  $path = drupal_get_path('module', 'os2web_spotbox');
+
+  // Create Paragraph.
+  $paragraph_yml = Yaml::parse(file_get_contents($path . '/config/optional/paragraphs.paragraphs_type.os2web_spotbox_reference.yml'));
+  if (!ParagraphsType::load('os2web_spotbox_reference')) {
+    ParagraphsType::create($paragraph_yml)->save();
+  }
+
+  $fields = [
+    'field_os2web_spotbox_reference_h',
+    'field_os2web_spotbox_reference',
+    'field_os2web_spotbox_ref_subhead',
+    'field_os2web_spotbox_ref_display',
+  ];
+  // Add new fields.
+  foreach ($fields as $field) {
+    // Create field storage.
+    $field_storage_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.storage.paragraph.' . $field . '.yml'));
+    if (!FieldStorageConfig::loadByName($field_storage_yml['entity_type'], $field_storage_yml['field_name'])) {
+      FieldStorageConfig::create($field_storage_yml)->save();
+    }
+    // Create field instance.
+    $field_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.field.paragraph.os2web_spotbox_reference.' . $field . '.yml'));
+    if (!FieldConfig::loadByName($field_yml['entity_type'], $field_yml['bundle'], $field_yml['field_name'])) {
+      FieldConfig::create($field_yml)->save();
+    }
+  }
+
+  // Update form/view displays.
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
+    'entity_form_display',
+    'paragraph.os2web_spotbox.default', [
+      'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+      'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+      'field_os2web_spotbox_ref_display' => 'content.field_os2web_spotbox_ref_display',
+      'hidden' => 'hidden',
     ]);
-    os2web_spotbox_update_entity_from_yml(
-        'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
-        'entity_form_display',
-        'paragraph.os2web_spotbox_reference.default', [
-        'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
-    ]);
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_view_display.paragraph.os2web_spotbox_reference.default',
+    'entity_view_display',
+    'paragraph.os2web_spotbox.default', [
+    $field => 'content.' . $field,
+    'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+    'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+    'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+    'hidden' => 'hidden',
+
+  ]);
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_view_display.paragraph.os2web_spotbox_reference.preview',
+    'entity_view_display',
+    'paragraph.os2web_spotbox.default', [
+    $field => 'content.' . $field,
+    'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+    'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+    'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+    'hidden' => 'hidden',
+  ]);
+}
+
+/**
+ * Update os2web_spotbox paragraphs form entity widget.
+ */
+function os2web_spotbox_update_8902() {
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.paragraph.os2web_spotbox.default',
+    'entity_form_display',
+    'paragraph.os2web_spotbox.default', [
+    'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+  ]);
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
+    'entity_form_display',
+    'paragraph.os2web_spotbox_reference.default', [
+    'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+  ]);
 }
