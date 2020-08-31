@@ -7,8 +7,6 @@ dependencies:
     - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference
     - field.field.paragraph.os2web_spotbox_reference.field_os2web_spotbox_reference_h
     - paragraphs.paragraphs_type.os2web_spotbox_reference
-  module:
-    - inline_entity_form
 id: paragraph.os2web_spotbox_reference.default
 targetEntityType: paragraph
 bundle: os2web_spotbox_reference
@@ -31,19 +29,12 @@ content:
   field_os2web_spotbox_reference:
     weight: 3
     settings:
-      form_mode: default
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      revision: false
-      override_labels: false
-      collapsible: false
-      collapsed: false
-      allow_duplicate: false
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     region: content
   field_os2web_spotbox_reference_h:
     weight: 1

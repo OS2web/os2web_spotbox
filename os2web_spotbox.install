@@ -191,3 +191,21 @@ function os2web_spotbox_update_8006(&$sandbox) {
     ->setDisplayConfigurable('form', TRUE);
   $definition_update_manager->updateFieldableEntityType($entity_type, $field_storage_definitions, $sandbox);
 }
+
+/**
+ * Update os2web_spotbox paragraphs form entity widget.
+ */
+function os2web_spotbox_update_8901() {
+    os2web_spotbox_update_entity_from_yml(
+        'core.entity_form_display.paragraph.os2web_spotbox.default',
+        'entity_form_display',
+        'paragraph.os2web_spotbox.default', [
+        'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+    ]);
+    os2web_spotbox_update_entity_from_yml(
+        'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
+        'entity_form_display',
+        'paragraph.os2web_spotbox_reference.default', [
+        'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+    ]);
+}

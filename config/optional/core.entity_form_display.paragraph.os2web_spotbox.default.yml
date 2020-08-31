@@ -4,29 +4,20 @@ dependencies:
   config:
     - field.field.paragraph.os2web_spotbox.field_os2web_spotbox
     - paragraphs.paragraphs_type.os2web_spotbox
-  module:
-    - inline_entity_form
 id: paragraph.os2web_spotbox.default
 targetEntityType: paragraph
 bundle: os2web_spotbox
 mode: default
 content:
   field_os2web_spotbox:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 0
     region: content
     settings:
-      form_mode: default
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      revision: false
-      override_labels: false
-      collapsible: false
-      collapsed: false
-      allow_duplicate: false
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   created: true
