@@ -91,8 +91,19 @@ class SpotboxRevisionDeleteForm extends ConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->SpotboxStorage->deleteRevision($this->revision->getRevisionId());
 
-    $this->logger('content')->notice('OS2Web Spotbox: deleted %title revision %revision.', ['%title' => $this->revision->label(), '%revision' => $this->revision->getRevisionId()]);
-    $this->messenger()->addMessage(t('Revision from %revision-date of OS2Web Spotbox %title has been deleted.', ['%revision-date' => \Drupal::service('date.formatter')->format($this->revision->getRevisionCreationTime()), '%title' => $this->revision->label()]));
+    $this->logger('content')->notice('OS2Web Spotbox: deleted %title revision %revision.',
+      [
+        '%title' => $this->revision->label(),
+        '%revision' => $this->revision->getRevisionId(),
+      ]
+    );
+    $this->messenger()->addMessage(t('Revision from %revision-date of OS2Web Spotbox %title has been deleted.',
+      [
+        '%revision-date' => \Drupal::service('date.formatter')->format($this->revision->getRevisionCreationTime()),
+        '%title' => $this->revision->label(),
+      ])
+    );
+
     $form_state->setRedirect(
       'entity.os2web_spotbox.canonical',
        ['os2web_spotbox' => $this->revision->id()]

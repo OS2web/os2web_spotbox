@@ -2,4 +2,3 @@ entity.os2web_spotbox.edit_form:
   route_name: entity.os2web_spotbox.edit_form
   group: os2web_spotbox
   title: Edit
-

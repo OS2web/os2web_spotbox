@@ -28,4 +28,3 @@ revert all os2web spotbox revisions:
 delete all os2web spotbox revisions:
   title: 'Delete all revisions'
   description: 'Role requires permission to <em>view OS2Web Spotbox revisions</em> and <em>delete rights</em> for os2web spotbox entities in question or <em>administer os2web spotbox entities</em>.'
-

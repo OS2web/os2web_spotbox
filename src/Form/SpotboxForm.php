@@ -38,7 +38,7 @@ class SpotboxForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var \Drupal\os2web_spotbox\Entity\Spotbox $entity */
+    /** @var \Drupal\os2web_spotbox\Entity\Spotbox $entity */
     $form = parent::buildForm($form, $form_state);
 
     self::adjustForm($form, $form_state);

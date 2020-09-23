@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class SpotboxSettingsForm.
+ * OS2Web Spotbox settings form.
  *
  * @ingroup os2web_spotbox
  */

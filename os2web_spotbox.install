@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+
 /**
  * Reads in new configuration.
  *
@@ -73,22 +74,22 @@ function os2web_spotbox_update_8003() {
     'core.entity_form_display.os2web_spotbox.os2web_spotbox.default',
     'entity_form_display',
     'os2web_spotbox.os2web_spotbox.default', [
-    'field_os2web_spotbox_image' => 'content.field_os2web_spotbox_image',
-    'field_os2web_spotbox_link' => 'content.field_os2web_spotbox_link',
-    'field_os2web_spotbox_link_butt' => 'content.field_os2web_spotbox_link_butt',
-    'field_os2web_spotbox_link_text' => 'content.field_os2web_spotbox_link_text',
-    'field_os2web_spotbox_video' => 'content.field_os2web_spotbox_video',
-  ]);
+      'field_os2web_spotbox_image' => 'content.field_os2web_spotbox_image',
+      'field_os2web_spotbox_link' => 'content.field_os2web_spotbox_link',
+      'field_os2web_spotbox_link_butt' => 'content.field_os2web_spotbox_link_butt',
+      'field_os2web_spotbox_link_text' => 'content.field_os2web_spotbox_link_text',
+      'field_os2web_spotbox_video' => 'content.field_os2web_spotbox_video',
+    ]);
   os2web_spotbox_update_entity_from_yml(
     'core.entity_view_display.os2web_spotbox.os2web_spotbox.default',
     'entity_view_display',
     'os2web_spotbox.os2web_spotbox.default', [
-    'field_os2web_spotbox_image' => 'content.field_os2web_spotbox_image',
-    'field_os2web_spotbox_link' => 'content.field_os2web_spotbox_link',
-    'field_os2web_spotbox_link_butt' => 'content.field_os2web_spotbox_link_butt',
-    'field_os2web_spotbox_link_text' => 'content.field_os2web_spotbox_link_text',
-    'field_os2web_spotbox_video' => 'content.field_os2web_spotbox_video',
-  ]);
+      'field_os2web_spotbox_image' => 'content.field_os2web_spotbox_image',
+      'field_os2web_spotbox_link' => 'content.field_os2web_spotbox_link',
+      'field_os2web_spotbox_link_butt' => 'content.field_os2web_spotbox_link_butt',
+      'field_os2web_spotbox_link_text' => 'content.field_os2web_spotbox_link_text',
+      'field_os2web_spotbox_video' => 'content.field_os2web_spotbox_video',
+    ]);
 
 }
 
@@ -100,15 +101,15 @@ function os2web_spotbox_update_8004() {
     'core.entity_form_display.paragraph.os2web_spotbox.default',
     'entity_form_display',
     'paragraph.os2web_spotbox.default', [
-    'field_os2web_spotbox' => 'content.field_os2web_spotbox',
-  ]);
+      'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+    ]);
 
   os2web_spotbox_update_entity_from_yml(
     'core.entity_view_display.paragraph.os2web_spotbox.default',
     'entity_view_display',
     'paragraph.os2web_spotbox.default', [
-    'field_os2web_spotbox' => 'content.field_os2web_spotbox',
-  ]);
+      'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+    ]);
 }
 
 /**
@@ -148,15 +149,15 @@ function os2web_spotbox_update_8005() {
     'core.entity_form_display.os2web_spotbox.os2web_spotbox.default',
     'entity_form_display',
     'os2web_spotbox.os2web_spotbox.default', [
-    'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
-  ]);
+      'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
+    ]);
 
   os2web_spotbox_update_entity_from_yml(
     'core.entity_view_display.os2web_spotbox.os2web_spotbox.default',
     'entity_view_display',
     'os2web_spotbox.os2web_spotbox.default', [
-    'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
-  ]);
+      'field_os2web_spotbox_bg_image' => 'content.field_os2web_spotbox_bg_image',
+    ]);
 
 }
 
@@ -245,12 +246,12 @@ function os2web_spotbox_update_8901() {
       'core.entity_form_display.' . $efd_id,
       'entity_form_display',
       $efd_id, [
-      'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
-      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
-      'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
-      'field_os2web_spotbox_ref_display' => 'content.field_os2web_spotbox_ref_display',
-      'hidden' => 'hidden',
-    ]);
+        'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+        'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+        'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+        'field_os2web_spotbox_ref_display' => 'content.field_os2web_spotbox_ref_display',
+        'hidden' => 'hidden',
+      ]);
   }
 
   // Create/update view display.
@@ -264,12 +265,12 @@ function os2web_spotbox_update_8901() {
       'core.entity_view_display.' . $evd_id,
       'entity_view_display',
       $evd_id, [
-      $field => 'content.' . $field,
-      'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
-      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
-      'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
-      'hidden' => 'hidden',
-    ]);
+        $field => 'content.' . $field,
+        'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+        'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+        'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+        'hidden' => 'hidden',
+      ]);
   }
 
   // Create/update view display.
@@ -283,12 +284,12 @@ function os2web_spotbox_update_8901() {
       'core.entity_view_display.' . $evd_id,
       'entity_view_display',
       $evd_id, [
-      $field => 'content.' . $field,
-      'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
-      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
-      'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
-      'hidden' => 'hidden',
-    ]);
+        $field => 'content.' . $field,
+        'field_os2web_spotbox_reference_h' => 'content.field_os2web_spotbox_reference_h',
+        'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+        'field_os2web_spotbox_ref_subhead' => 'content.field_os2web_spotbox_ref_subhead',
+        'hidden' => 'hidden',
+      ]);
   }
 }
 
@@ -300,12 +301,24 @@ function os2web_spotbox_update_8902() {
     'core.entity_form_display.paragraph.os2web_spotbox.default',
     'entity_form_display',
     'paragraph.os2web_spotbox.default', [
-    'field_os2web_spotbox' => 'content.field_os2web_spotbox',
-  ]);
+      'field_os2web_spotbox' => 'content.field_os2web_spotbox',
+    ]);
   os2web_spotbox_update_entity_from_yml(
     'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
     'entity_form_display',
     'paragraph.os2web_spotbox_reference.default', [
-    'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
-  ]);
+      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+    ]);
+}
+
+/**
+ * Update os2web_spotbox paragraphs form entity widget.
+ */
+function os2web_spotbox_update_8903() {
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.paragraph.os2web_spotbox_reference.default',
+    'entity_form_display',
+    'paragraph.os2web_spotbox_reference.default', [
+      'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
+    ]);
 }

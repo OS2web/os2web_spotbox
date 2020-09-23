@@ -26,7 +26,7 @@ class SpotboxListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var \Drupal\os2web_spotbox\Entity\Spotbox $entity */
+    /** @var \Drupal\os2web_spotbox\Entity\Spotbox $entity */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),

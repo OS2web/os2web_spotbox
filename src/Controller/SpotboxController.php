@@ -93,7 +93,11 @@ class SpotboxController extends ControllerBase implements ContainerInjectionInte
     $langname = $os2web_spotbox->language()->getName();
     $languages = $os2web_spotbox->getTranslationLanguages();
     $has_translations = (count($languages) > 1);
-    $build['#title'] = $has_translations ? $this->t('@langname revisions for %title', ['@langname' => $langname, '%title' => $os2web_spotbox->label()]) : $this->t('Revisions for %title', ['%title' => $os2web_spotbox->label()]);
+    $build['#title'] = $has_translations ? $this->t('@langname revisions for %title',
+      [
+        '@langname' => $langname,
+        '%title' => $os2web_spotbox->label(),
+      ]) : $this->t('Revisions for %title', ['%title' => $os2web_spotbox->label()]);
 
     $header = [$this->t('Revision'), $this->t('Operations')];
     $revert_permission = (($account->hasPermission("revert all os2web spotbox revisions") || $account->hasPermission('administer os2web spotbox entities')));
