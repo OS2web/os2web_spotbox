@@ -18,7 +18,7 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image
+    type: image_image
     region: content
   name:
     type: string_textfield
