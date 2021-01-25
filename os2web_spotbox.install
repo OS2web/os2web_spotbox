@@ -11,6 +11,8 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\Core\Entity\Entity\EntityViewMode;
 
 /**
  * Reads in new configuration.
@@ -321,4 +323,126 @@ function os2web_spotbox_update_8903() {
     'paragraph.os2web_spotbox_reference.default', [
       'field_os2web_spotbox_reference' => 'content.field_os2web_spotbox_reference',
     ]);
+}
+
+/**
+ * Add icon reference to os2web_spotbox paragraphs.
+ */
+function os2web_spotbox_update_8904() {
+  \Drupal::service('module_installer')->install(['svg_image']);
+
+  $path = drupal_get_path('module', 'os2web_spotbox');
+
+  // Add taxonomy vocabulary.
+  if (empty(Vocabulary::load('os2web_icons'))) {
+    os2web_spotbox_read_in_new_config('taxonomy.vocabulary.os2web_icons');
+  }
+
+  // Create icon field storage.
+  $field_storage_yml = Yaml::parse(file_get_contents($path . "/config/optional/field.storage.taxonomy_term.field_os2web_icon_file.yml"));
+  if (!FieldStorageConfig::loadByName($field_storage_yml['entity_type'], $field_storage_yml['field_name'])) {
+    FieldStorageConfig::create($field_storage_yml)->save();
+  }
+  // Create icon field instance.
+  $field_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.field.taxonomy_term.os2web_icons.field_os2web_icon_file.yml'));
+  if (!FieldConfig::loadByName($field_yml['entity_type'], $field_yml['bundle'], $field_yml['field_name'])) {
+    FieldConfig::create($field_yml)->save();
+  }
+
+  // Create icon reference field storage.
+  $field_storage_yml = Yaml::parse(file_get_contents($path . "/config/optional/field.storage.os2web_spotbox.field_os2web_spotbox_icon.yml"));
+  if (!FieldStorageConfig::loadByName($field_storage_yml['entity_type'], $field_storage_yml['field_name'])) {
+    FieldStorageConfig::create($field_storage_yml)->save();
+  }
+  // Create icon reference field instance.
+  $field_yml = Yaml::parse(file_get_contents($path . '/config/optional/field.field.os2web_spotbox.os2web_spotbox.field_os2web_spotbox_icon.yml'));
+  if (!FieldConfig::loadByName($field_yml['entity_type'], $field_yml['bundle'], $field_yml['field_name'])) {
+    FieldConfig::create($field_yml)->save();
+  }
+
+  drupal_flush_all_caches();
+
+  // Create/update form view for icon file.
+  $efd_id = 'taxonomy_term.os2web_icons.default';
+  $efd_yml = Yaml::parse(file_get_contents($path . '/config/optional/core.entity_form_display.' . $efd_id . '.yml'));
+  if (!EntityViewDisplay::load($efd_id)) {
+    EntityViewDisplay::create($efd_yml)->save();
+  }
+  else {
+    os2web_spotbox_update_entity_from_yml(
+      'core.entity_form_display.' . $efd_id,
+      'entity_form_display',
+      $efd_id, [
+      'field_os2web_icon_file' => 'content.field_os2web_icon_file',
+      'hidden' => 'hidden',
+    ]);
+  }
+
+  // Create/update default display view for icon file.
+  $evd_id = 'taxonomy_term.os2web_icons.default';
+  $evd_yml = Yaml::parse(file_get_contents($path . '/config/optional/core.entity_view_display.' . $evd_id . '.yml'));
+  if (!EntityViewDisplay::load($evd_id)) {
+    EntityViewDisplay::create($evd_yml)->save();
+  }
+  else {
+    os2web_spotbox_update_entity_from_yml(
+      'core.entity_view_display.' . $evd_id,
+      'entity_view_display',
+      $evd_id, [
+      'field_os2web_icon_file' => 'content.field_os2web_icon_file',
+      'hidden' => 'hidden',
+    ]);
+  }
+
+  // Create/update preview display view for icon file.
+  $evd_id = 'taxonomy_term.os2web_icons.preview';
+  $evd_yml = Yaml::parse(file_get_contents($path . '/config/optional/core.entity_view_display.' . $evd_id . '.yml'));
+  if (!EntityViewDisplay::load($evd_id)) {
+    if (empty(EntityViewMode::load('taxonomy_term.preview'))) {
+      os2web_spotbox_read_in_new_config('core.entity_view_mode.taxonomy_term.preview');
+    }
+    EntityViewDisplay::create($evd_yml)->save();
+  }
+  else {
+    os2web_spotbox_update_entity_from_yml(
+      'core.entity_view_display.' . $evd_id,
+      'entity_view_display',
+      $evd_id, [
+      'field_os2web_icon_file' => 'content.field_os2web_icon_file',
+    ]);
+  }
+
+  // Update form view mode with icon reference field settings.
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_form_display.os2web_spotbox.os2web_spotbox.default',
+    'entity_form_display',
+    'os2web_spotbox.os2web_spotbox.default', [
+    'field_os2web_spotbox_icon' => 'content.field_os2web_spotbox_icon',
+  ]);
+
+  // Update display view with icon reference field settings.
+  // Default display view mode.
+  os2web_spotbox_update_entity_from_yml(
+    'core.entity_view_display.os2web_spotbox.os2web_spotbox.default',
+    'entity_view_display',
+    'os2web_spotbox.os2web_spotbox.default', [
+    'field_os2web_spotbox_icon' => 'content.field_os2web_spotbox_icon',
+  ]);
+  // Create/update preview display view.
+  $evd_id = 'os2web_spotbox.os2web_spotbox.preview';
+  $evd_yml = Yaml::parse(file_get_contents($path . '/config/optional/core.entity_view_display.' . $evd_id . '.yml'));
+  if (!EntityViewDisplay::load($evd_id)) {
+    if (empty(EntityViewMode::load('os2web_spotbox.preview'))) {
+      os2web_spotbox_read_in_new_config('core.entity_view_mode.os2web_spotbox.preview');
+    }
+    EntityViewDisplay::create($evd_yml)->save();
+  }
+  else {
+    os2web_spotbox_update_entity_from_yml(
+      'core.entity_view_display.' . $evd_id,
+      'entity_view_display',
+      $evd_id, [
+      'field_os2web_spotbox_icon' => 'content.field_os2web_spotbox_icon',
+    ]);
+  }
 }
