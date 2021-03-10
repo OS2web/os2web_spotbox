@@ -13,3 +13,4 @@ dependencies:
   - inline_entity_form
   - image_widget_crop
   - menu_item_extras
+  - svg_image
