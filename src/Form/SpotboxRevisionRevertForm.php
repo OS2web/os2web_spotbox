@@ -87,7 +87,7 @@ class SpotboxRevisionRevertForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $os2web_spotbox_revision = NULL) {
-    $this->revision = $this->SpotboxStorage->loadRevision($os2web_spotbox_revision);
+    $this->revision = $this->spotboxStorage->loadRevision($os2web_spotbox_revision);
     $form = parent::buildForm($form, $form_state);
 
     return $form;
