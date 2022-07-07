@@ -159,7 +159,7 @@ class SpotboxForm extends ContentEntityForm {
     $form['#id'] = $wrapper_id;
 
     $form['type']['widget']['#ajax'] = [
-      'callback' => [static::class, 'ajaxCallback'],
+      'callback' => '::ajaxCallback',
       'wrapper' => $wrapper_id,
     ];
 
