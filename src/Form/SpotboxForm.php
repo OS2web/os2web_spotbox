@@ -94,19 +94,47 @@ class SpotboxForm extends ContentEntityForm {
    * Implements ajax callback for spotbox form.
    */
   public function ajaxCallback(array $form, FormStateInterface $form_state) {
-    $triggering_element = $form_state->getTriggeringElement();
-    $spotbox_form_parents = [];
-    foreach ($triggering_element['#field_parents'] as $key) {
-      $spotbox_form_parents[] = $key;
-      if (strpos($key, 'field_') === 0) {
-        $spotbox_form_parents[] = 'widget';
-      }
-    }
-    // @TODO Integration with Inline entity forms still works not well
-    // on edit mode.
-    $spotbox_form = NestedArray::getValue($form, $spotbox_form_parents);
-    $wrapper = static::getFormWrapperId($spotbox_form);
-    return $spotbox_form[$wrapper];
+    // Getting trigger element.
+    $triggerElement = $form_state->getTriggeringElement();
+
+    // Getting element parents.
+    $arrayParents = $triggerElement['#array_parents'];
+
+    // Removing last two elements from parent tree.
+    //
+    // We cannot return the entire form because the entire form is not always the same as spotbox create form
+    //
+    // Example 1:
+    // Array
+    // (
+    //    [0] => type
+    //    [1] => widget
+    // )
+    //
+    // In this case getting value is the same as returning the entire form.
+    //
+    // Example 2:
+    // Array
+    // (
+    //     ...
+    //     [4] => field_os2web_spotbox_reference
+    //     [5] => widget
+    //     [6] => form
+    //     [7] => inline_entity_form -> that is the level which we want to return
+    //     [8] => type
+    //     [9] => widget
+    // )
+    // It's not the case here, as spotbox form is part of other form, for example Inline Entity form.
+    // So we must get two levels up the tree relative to the trigger element.
+    array_pop($arrayParents);
+    array_pop($arrayParents);
+
+    // The form element, which is a second parent of a triggering element.
+    $formsElement = NestedArray::getValue($form, $arrayParents);
+
+    // Returning the container, which is a widget with a correct delta of a
+    // parent element.
+    return $formsElement;
   }
 
   /**
@@ -124,7 +152,12 @@ class SpotboxForm extends ContentEntityForm {
     elseif ($form_state->getFormObject()->getEntity() instanceof SpotboxInterface) {
       $entity = $form_state->getFormObject()->getEntity();
     }
+
     $wrapper_id = static::getFormWrapperId($form);
+
+    // Adding wrapper for replacing the entire form via ajax.
+    $form['#id'] = $wrapper_id;
+
     $form['type']['widget']['#ajax'] = [
       'callback' => [static::class, 'ajaxCallback'],
       'wrapper' => $wrapper_id,
@@ -143,23 +176,12 @@ class SpotboxForm extends ContentEntityForm {
       }
     }
 
+    // Disabling the fields depending on the type.
     $disabled_fields = isset($types[$type]['disabled_fields']) ? $types[$type]['disabled_fields'] : [];
-
-    $form[$wrapper_id] = [
-      '#type' => 'container',
-      '#attributes' => ['id' => $wrapper_id],
-    ];
     foreach (Element::children($form) as $element) {
-      if ($element == $wrapper_id || $element == 'actions') {
-        continue;
+      if (in_array($element, $disabled_fields)) {
+        $form[$element]['#access'] = FALSE;
       }
-      if (strpos($element, 'field_os2web_spotbox') === FALSE
-        || (!in_array($element, $disabled_fields) && !empty($disabled_fields))) {
-        $form[$wrapper_id][$element] = $form[$element];
-        unset($form[$element]);
-        continue;
-      }
-      $form[$element]['#access'] = FALSE;
     }
   }
 
