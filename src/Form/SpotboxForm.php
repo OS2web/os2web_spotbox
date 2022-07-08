@@ -93,7 +93,7 @@ class SpotboxForm extends ContentEntityForm {
   /**
    * Implements ajax callback for spotbox form.
    */
-  public function ajaxCallback(array $form, FormStateInterface $form_state) {
+  public static function ajaxCallback(array $form, FormStateInterface $form_state) {
     // Getting trigger element.
     $triggerElement = $form_state->getTriggeringElement();
 
@@ -159,7 +159,7 @@ class SpotboxForm extends ContentEntityForm {
     $form['#id'] = $wrapper_id;
 
     $form['type']['widget']['#ajax'] = [
-      'callback' => '::ajaxCallback',
+      'callback' => 'Drupal\os2web_spotbox\Form\SpotboxForm::ajaxCallback',
       'wrapper' => $wrapper_id,
     ];
 
