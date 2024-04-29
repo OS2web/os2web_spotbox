@@ -2,14 +2,21 @@
   "name": "os2web/os2web_spotbox",
   "description": "Spotbox entity",
   "type": "drupal-module",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "./develop/*",
+      "packagist.org": false
+    }
+  ],
   "require": {
     "drupal/core": "*",
-    "drupal/inline_entity_form": "^1.0@RC",
+    "drupal/inline_entity_form": "^3.0@RC",
     "drupal/paragraphs": "*",
     "drupal/image_widget_crop": "*",
     "drupal/crop": "*",
     "drupal/menu_item_extras": "^2.11",
-    "drupal/svg_image": "^1.13"
+    "drupal/svg_image": "*"
   },
   "license": "EUPL-1.2",
   "minimum-stability": "dev"
