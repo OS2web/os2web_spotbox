@@ -2,13 +2,6 @@
   "name": "os2web/os2web_spotbox",
   "description": "Spotbox entity",
   "type": "drupal-module",
-  "repositories": [
-    {
-      "type": "path",
-      "url": "./develop/*",
-      "packagist.org": false
-    }
-  ],
   "require": {
     "drupal/core": "*",
     "drupal/inline_entity_form": "^3.0@RC",
