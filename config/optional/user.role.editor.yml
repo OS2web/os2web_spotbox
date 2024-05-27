@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: editor
+label: Editor
+weight: 3
+is_admin: null
+permissions:
+  - 'add os2web spotbox entities'
+  - 'edit os2web spotbox entities'
+  - 'view all os2web spotbox revisions'
+  - 'view unpublished os2web spotbox entities'
